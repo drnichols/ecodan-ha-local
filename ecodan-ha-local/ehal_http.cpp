@@ -416,9 +416,12 @@ namespace ehal::http
             page.replace(F("{{mode_dhw_timer}}"), bool_to_emoji(status.DhwTimerMode));
             page.replace(F("{{mode_heating_cooling}}"), status.hp_mode_as_string());
             page.replace(F("{{mode_dhw}}"), status.dhw_mode_as_string());
-
+            
             page.replace(F("{{min_flow_temp}}"), String(status.MinimumFlowTemperature));
             page.replace(F("{{max_flow_temp}}"), String(status.MaximumFlowTemperature));
+
+            page.replace(F("{{zone1_pumps}}"), bool_to_emoji(status.Zone1Pumps));
+            page.replace(F("{{zone2_pumps}}"), bool_to_emoji(status.Zone2Pumps));
         }
 
         server.send(200, F("text/html"), page);

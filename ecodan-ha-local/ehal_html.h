@@ -341,6 +341,14 @@ namespace ehal
         <td>Maximum Flow Temperature:</td>
         <td>{{max_flow_temp}}&#176;C</td>
     </tr>
+    <tr>
+        <td>Zone 1 Pumps:</td>
+        <td>{{zone1_pumps}}</td>
+    </tr>
+    <tr>
+        <td>Zone 2 Pumps:</td>
+        <td>{{zone2_pumps}}</td>
+    </tr>
 </table>)";
 
     const char* BODY_TEMPLATE_LOGIN PROGMEM = R"(<h1>Login</h1>

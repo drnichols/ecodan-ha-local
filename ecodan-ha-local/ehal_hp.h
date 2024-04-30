@@ -11,6 +11,8 @@ namespace ehal::hp
         bool Initialized = false;
 
         bool DefrostActive;
+        bool Zone1Pumps;
+        bool Zone2Pumps;
         bool DhwForcedActive;
         uint8_t OutputPower;
 
