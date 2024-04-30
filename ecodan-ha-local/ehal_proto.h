@@ -47,6 +47,7 @@ namespace ehal::hp
     enum class GetType : uint8_t
     {
         DEFROST_STATE = 0x02,
+        UNKNOWN_03 = 0x03,
         COMPRESSOR_FREQUENCY = 0x04,
         FORCED_DHW_STATE = 0x05,
         HEATING_POWER = 0x07,
@@ -54,8 +55,11 @@ namespace ehal::hp
         SH_TEMPERATURE_STATE = 0x0B,
         DHW_TEMPERATURE_STATE_A = 0x0C,
         DHW_TEMPERATURE_STATE_B = 0x0D,
+        UNKNOWN_TEMPS_0E = 0x0E,
         ACTIVE_TIME = 0x13,
         FLOW_RATE = 0x14,
+        UNKNOWN_15 = 0x15,
+        PUMPS_RUNNING_16 = 0x16,
         MODE_FLAGS_A = 0x26,
         MODE_FLAGS_B = 0x28,
         ENERGY_USAGE = 0xA1,

@@ -216,6 +216,7 @@ namespace ehal::hp
             }
 
             cmdQueue.emplace(MsgType::GET_CMD, GetType::DEFROST_STATE);
+            cmdQueue.emplace(MsgType::GET_CMD, GetType::UNKNOWN_03);
             cmdQueue.emplace(MsgType::GET_CMD, GetType::COMPRESSOR_FREQUENCY);
             cmdQueue.emplace(MsgType::GET_CMD, GetType::FORCED_DHW_STATE);
             cmdQueue.emplace(MsgType::GET_CMD, GetType::HEATING_POWER);
@@ -223,8 +224,11 @@ namespace ehal::hp
             cmdQueue.emplace(MsgType::GET_CMD, GetType::SH_TEMPERATURE_STATE);
             cmdQueue.emplace(MsgType::GET_CMD, GetType::DHW_TEMPERATURE_STATE_A);
             cmdQueue.emplace(MsgType::GET_CMD, GetType::DHW_TEMPERATURE_STATE_B);
+            cmdQueue.emplace(MsgType::GET_CMD, GetType::UNKNOWN_TEMPS_0E);
             // cmdQueue.emplace(MsgType::GET_CMD, GetType::ACTIVE_TIME);
             cmdQueue.emplace(MsgType::GET_CMD, GetType::FLOW_RATE);
+            cmdQueue.emplace(MsgType::GET_CMD, GetType::UNKNOWN_15);
+            cmdQueue.emplace(MsgType::GET_CMD, GetType::PUMPS_RUNNING_16);
             cmdQueue.emplace(MsgType::GET_CMD, GetType::MODE_FLAGS_A);
             cmdQueue.emplace(MsgType::GET_CMD, GetType::MODE_FLAGS_B);
             cmdQueue.emplace(MsgType::GET_CMD, GetType::ENERGY_USAGE);
@@ -510,6 +514,25 @@ namespace ehal::hp
             case GetType::DEFROST_STATE:
                 status.DefrostActive = res[3] != 0;
                 break;
+            case GetType::PUMP_STATE:
+                switch (res[8])
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        status.Zone1Pumps = true;
+                        status.Zone2Pumps = true;
+                        break;
+                    case 2:
+                        status.Zone1Pumps = true;
+                        break;
+                    case 3:
+                        status.Zone2Pumps = true;
+                        break;
+                    default:
+                        log_web(F("Unknown pump state received: %u"), static_cast<uint8_t>(res[8]));
+                        break;
+                }
             case GetType::COMPRESSOR_FREQUENCY:
                 status.CompressorFrequency = res[1];
                 break;
